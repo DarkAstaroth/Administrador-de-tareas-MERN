@@ -17,7 +17,7 @@ const Login = () => {
     const onChange = e =>{
         setUsuario({
             ...usuario,
-            [e.target.name] : e.traget.value
+            [e.target.name] : e.target.value
         });
     }
 
@@ -28,6 +28,9 @@ const Login = () => {
 
         // validar que no haya campos vacios
 
+        // Password minimo de 6 caracteres
+
+        // Los 2 passwords sean iguales
 
         // pasarlo al action
     }
