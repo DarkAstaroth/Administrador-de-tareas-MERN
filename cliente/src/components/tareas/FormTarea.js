@@ -10,7 +10,6 @@ const FormTarea = () => {
                         name="nombre" 
                         className="input-text"
                         placeholder="Nombre Tarea..."
-                        name="nombre"
                     />
                 </div>
 
