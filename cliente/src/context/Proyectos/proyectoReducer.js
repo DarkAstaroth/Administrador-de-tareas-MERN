@@ -1,18 +1,24 @@
-import {FORMULARIO_PROYECTO , OBTENER_PROYECTOS} from '../../types'
+import { AGREGAR_PROYECTO, FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types'
 
-export default (state , action ) => {
-    switch(action.type){
-        case FORMULARIO_PROYECTO :
+export default (state, action) => {
+    switch (action.type) {
+        case FORMULARIO_PROYECTO:
             return {
                 ...state,
-                formulario : true
+                formulario: true
             }
-        case OBTENER_PROYECTOS :
+        case OBTENER_PROYECTOS:
             return {
                 ...state,
-                proyectos : action.payload
+                proyectos: action.payload
             }
-        default : 
+        case AGREGAR_PROYECTO:
+            return {
+                ...state,
+                proyectos: [...state.proyectos,action.payload],
+                formulario:false
+            }
+        default:
             return state
     }
 }
