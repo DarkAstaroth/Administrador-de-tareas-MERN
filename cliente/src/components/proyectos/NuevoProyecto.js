@@ -1,10 +1,16 @@
-import React, { Fragment , useState} from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+import proyectoContext from '../../context/Proyectos/proyectoContext';
 
 const NuevoProyecto = () => {
 
+    // obtener el state del formulario
+
+    const proyectosContext = useContext(proyectoContext);
+    const { formulario } = proyectosContext;
+
     // state para proyecto
     const [proyecto, setProyecto] = useState({
-        nombre:''
+        nombre: ''
     });
 
     // Extraer nombre del proyecto
@@ -12,10 +18,10 @@ const NuevoProyecto = () => {
 
 
     // lee los contenidos del input
-    const onChangeProyecto = e=>{
+    const onChangeProyecto = e => {
         setProyecto({
             ...proyecto,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -40,25 +46,34 @@ const NuevoProyecto = () => {
                 Nuevo Proyecto
         </button>
 
-            <form
-                className="formulario-nuevo-proyecto"
-                onSubmit={onSubmitProyecto}
-            >
-                    <input 
-                        type="text" 
-                        className="input-text"
-                        name="nombre" 
-                        placeholder="Nombre proyecto"
-                        onChange={onChangeProyecto}
-                        value={nombre}
-                    />
+            {
+                formulario
+                    ?
+                    (
+                        <form
+                            className="formulario-nuevo-proyecto"
+                            onSubmit={onSubmitProyecto}
+                        >
+                            <input
+                                type="text"
+                                className="input-text"
+                                name="nombre"
+                                placeholder="Nombre proyecto"
+                                onChange={onChangeProyecto}
+                                value={nombre}
+                            />
 
-                    <input 
-                        type="submit"
-                        className="btn btn-primario btn-block"
-                        value="Agregar Proyecto"
-                    />
-            </form>
+                            <input
+                                type="submit"
+                                className="btn btn-primario btn-block"
+                                value="Agregar Proyecto"
+                            />
+                        </form>
+                    )
+                    :
+                    null
+            }
+
         </Fragment>
     );
 }
