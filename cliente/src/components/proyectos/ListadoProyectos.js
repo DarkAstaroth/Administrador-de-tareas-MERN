@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Proyecto from './Proyecto'
 import proyectoContext from '../../context/Proyectos/proyectoContext';
 
@@ -6,11 +6,16 @@ const ListadoProyectos = () => {
 
     // Extraer proyectos del state inicial
     const proyectosContext = useContext(proyectoContext);
-    const {proyectos} = proyectosContext;
+    const {proyectos,obtenerProyectos} = proyectosContext;
 
+    // obtener proyectos cuando se carga el componente
+    useEffect(() => {
+        obtenerProyectos();
+    }, []);
+    
     // revisar si proyectos tiene contenido
     if(proyectos.length === 0 ) return null;
-    
+
     return ( 
         <ul className="listado-proyectos">
             {proyectos.map(proyecto =>(
