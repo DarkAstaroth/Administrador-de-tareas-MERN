@@ -1,22 +1,34 @@
-import React, { useReducer }  from 'react'
+import React, { useReducer } from 'react'
 import TareaContext from './tareaContext'
 import TareaReducer from './tareaReducer'
 
 const TareaState = props => {
     const initialState = {
-        tareas : [],
+        tareas: [
+            { nombre: 'Elegir Plataforma', estado: true, proyectoId: 1 },
+            { nombre: 'Elegir Colores', estado: false, proyectoId: 2 },
+            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: 3 },
+            { nombre: 'Elegir Hosting', estado: true, proyectoId: 1 },
+            { nombre: 'Elegir Colores', estado: false, proyectoId: 2 },
+            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: 3 },
+
+        ],
     }
 
-   // crear dispacher y state
-   
+    // crear dispacher y state
+
     const [state, dispatch] = useReducer(TareaReducer, initialState);
 
     return (
-        <TareaContext.Provider>
-            {props.children}      
+        <TareaContext.Provider
+            value={{
+                tareas : state.tareas
+            }}
+        >
+            {props.children}
         </TareaContext.Provider>
     );
 }
 
-export default TareaState;  
+export default TareaState;
 
