@@ -1,6 +1,9 @@
 import React, { useReducer } from 'react'
 import TareaContext from './tareaContext'
 import TareaReducer from './tareaReducer'
+import {
+    TAREAS_PROYECTO
+} from '../../types/index'
 
 const TareaState = props => {
     const initialState = {
@@ -19,10 +22,21 @@ const TareaState = props => {
 
     const [state, dispatch] = useReducer(TareaReducer, initialState);
 
+    // crear las funciones
+
+    // obtener las tareas de un proyecto
+    const obtenerTareas = proyectoId => { 
+        dispatch({
+            type: TAREAS_PROYECTO,
+            payload : proyectoId
+        })
+    }
+
     return (
         <TareaContext.Provider
             value={{
-                tareas : state.tareas
+                tareas: state.tareas,
+                obtenerTareas
             }}
         >
             {props.children}
