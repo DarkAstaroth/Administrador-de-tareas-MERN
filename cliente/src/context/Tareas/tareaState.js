@@ -8,14 +8,17 @@ import {
 const TareaState = props => {
     const initialState = {
         tareas: [
-            { nombre: 'Elegir Plataforma', estado: true, proyectoId: 1 },
-            { nombre: 'Elegir Colores', estado: false, proyectoId: 2 },
-            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: 3 },
-            { nombre: 'Elegir Hosting', estado: true, proyectoId: 1 },
-            { nombre: 'Elegir Colores', estado: false, proyectoId: 2 },
-            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: 3 },
+            { nombre: 'Elegir Plataforma', estado: true, proyectoId: '1' },
+            { nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
+            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
+            { nombre: 'Elegir Hosting', estado: true, proyectoId: '1' },
+            { nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
+            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
+            { nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
+            { nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
 
         ],
+        tareasproyecto : null
     }
 
     // crear dispacher y state
@@ -36,7 +39,8 @@ const TareaState = props => {
         <TareaContext.Provider
             value={{
                 tareas: state.tareas,
-                obtenerTareas
+                tareasproyecto : state.tareasproyecto,
+                obtenerTareas,
             }}
         >
             {props.children}
