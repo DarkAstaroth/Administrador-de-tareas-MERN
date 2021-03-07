@@ -60,12 +60,22 @@ exports.actualizarProyecto = async (req, res) => {
     try {
 
         // Revisar el id
+        let proyecto = await Proyecto.findById(req.params.id);
 
-        // si el proyecto existe o no
+        // Si el proyecto existe o no
+        if (!proyecto) {
+            return res.status(400).json({ msg: "Proyecto no encontrado" })
+        }
 
-        // verificar el creador del proyecto
+        // Verificar el creador del proyecto
+        if (proyecto.creador.toString() !== req.usuario.id) {
+            return res.status(401).json({ msg: "No autorizado" })
+        }
 
         // Actualizar
+        proyectos = await Proyecto.findByIdAndUpdate({ _id: req.params.id }, { $set: nuevoProyecto }, { new: true });
+
+        res.json({ proyecto });
 
     } catch (error) {
         console.log(error);
