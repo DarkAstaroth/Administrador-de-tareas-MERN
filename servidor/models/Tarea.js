@@ -19,4 +19,4 @@ const TareaSchema = mongoose.Schema({
         ref:'Proyecto'
     }
 });
-module.exports = mongoose.model('Tarea',TareaSchema)
+module.exports = mongoose.model('Tarea', TareaSchema);
