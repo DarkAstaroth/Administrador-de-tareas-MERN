@@ -10,7 +10,7 @@ router.post('/',
     auth,
     [
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-        check('proyecto','El proyecto es obligatorio').not().isEmpty()
+        check('proyecto', 'El proyecto es obligatorio').not().isEmpty()
     ],
     tareaController.creaTarea
 );
@@ -19,6 +19,12 @@ router.post('/',
 router.get('/',
     auth,
     tareaController.obtenerTareas
+);
+
+// Actualizar Tarea
+router.put('/:id',
+    auth,
+    tareaController.actualizarTarea
 );
 
 module.exports = router;
