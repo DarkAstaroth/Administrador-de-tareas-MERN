@@ -10,11 +10,14 @@ import AuthState from './context/Autenticacion/authState';
 import AuthContext from './context/Autenticacion/authContext';
 
 function App() {
+
+
+
   return (
     <ProyectoState>
       <TareaState>
         <AlertaState>
-          <AuthContext>
+          <AuthState>
             <Router>
               <Switch>
                 <Route exact path="/" component={Login} />
@@ -22,7 +25,7 @@ function App() {
                 <Route exact path="/proyectos" component={Proyectos} />
               </Switch>
             </Router>
-          </AuthContext>
+          </AuthState>
         </AlertaState>
       </TareaState>
     </ProyectoState>
