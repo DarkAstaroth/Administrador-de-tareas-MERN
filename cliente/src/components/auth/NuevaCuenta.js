@@ -1,41 +1,56 @@
-import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import AlertaContext from '../../context/Alertas/alertaContext';
 
 const NuevaCuenta = () => {
 
-    // state para iniciar sesion
+    // Extraer los valores del context
+    const alertaContext = useContext(AlertaContext);
+    const { alerta, mostrarAlerta } = alertaContext;
 
+    // state para iniciar sesion
     const [usuario, setUsuario] = useState({
-        nombre:'',
-        email:'',
-        password:'',
-        confirmar:''
+        nombre: '',
+        email: '',
+        password: '',
+        confirmar: ''
     });
 
     // extraer de usuario
+    const { nombre, email, password, confirmar } = usuario;
 
-    const {nombre, email ,password, confirmar} = usuario;
-
-    const onChange = e =>{
+    const onChange = e => {
         setUsuario({
             ...usuario,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         });
     }
 
     // cuando el usuario quiere iniciar sesion
 
-    const onSubmit = e =>{
+    const onSubmit = e => {
         e.preventDefault();
 
         // validar que no haya campos vacios
+        if (
+            nombre.trim() === '' ||
+            email.trim() === '' ||
+            password.trim() === '' ||
+            confirmar.trim() === ''
+        ) {
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
+        }
 
 
         // pasarlo al action
     }
 
-    return ( 
+    return (
         <div className="form-usuario">
+            { alerta
+                ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>)
+                : null
+            }
             <div className="contenedor-form sombra-dark">
                 <h1>Obtener una cuenta</h1>
 
@@ -44,9 +59,9 @@ const NuevaCuenta = () => {
                 >
                     <div className="campo-form">
                         <label htmlFor="email">Nombre</label>
-                        <input 
-                            type="text" 
-                            name="nombre" 
+                        <input
+                            type="text"
+                            name="nombre"
                             id="nombre"
                             placeholder="Tu Nombre"
                             onChange={onChange}
@@ -56,9 +71,9 @@ const NuevaCuenta = () => {
 
                     <div className="campo-form">
                         <label htmlFor="email">Email</label>
-                        <input 
-                            type="email" 
-                            name="email" 
+                        <input
+                            type="email"
+                            name="email"
                             id="email"
                             placeholder="Tu Email"
                             onChange={onChange}
@@ -68,9 +83,9 @@ const NuevaCuenta = () => {
 
                     <div className="campo-form">
                         <label htmlFor="password">Password</label>
-                        <input 
-                            type="password" 
-                            name="password" 
+                        <input
+                            type="password"
+                            name="password"
                             id="password"
                             placeholder="Tu Password"
                             onChange={onChange}
@@ -80,9 +95,9 @@ const NuevaCuenta = () => {
 
                     <div className="campo-form">
                         <label htmlFor="confirmar">Confirmar tu password</label>
-                        <input 
-                            type="password" 
-                            name="confirmar" 
+                        <input
+                            type="password"
+                            name="confirmar"
                             id="confirmar"
                             placeholder="Repite tu password"
                             onChange={onChange}
@@ -91,9 +106,9 @@ const NuevaCuenta = () => {
                     </div>
 
                     <div className="campo-form">
-                        <input 
+                        <input
                             type="submit"
-                            className="btn btn-primario btn-block" 
+                            className="btn btn-primario btn-block"
                             value="Registrarme"
                         />
                     </div>
@@ -101,7 +116,7 @@ const NuevaCuenta = () => {
                 <Link to={'/'} className="enlace-cuenta">Volver a iniciar sesion</Link>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default NuevaCuenta;
