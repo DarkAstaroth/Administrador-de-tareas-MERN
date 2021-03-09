@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import AlertaContext from '../../context/Alertas/alertaContext';
 import AuthContext from '../../context/Autenticacion/authContext';
 
-const Login = () => {
+const Login = (props) => {
 
 
     // Extraer los valores del context
@@ -13,6 +13,16 @@ const Login = () => {
     const authContext = useContext(AuthContext);
     const { mensaje, autenticado, iniciarSesion } = authContext;
 
+    // En caso de que el password o usuario no exista
+    useEffect(() => {
+        if (autenticado) {
+            props.history.push('/proyectos')
+        }
+        if (mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+    }, [mensaje, autenticado, props.history])
+
     // state para iniciar sesion
     const [usuario, setUsuario] = useState({
         email: '',
@@ -20,7 +30,6 @@ const Login = () => {
     });
 
     // extraer de usuario
-
     const { email, password } = usuario;
 
     const onChange = e => {
@@ -31,7 +40,6 @@ const Login = () => {
     }
 
     // cuando el usuario quiere iniciar sesion
-
     const onSubmit = e => {
         e.preventDefault();
 
