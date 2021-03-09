@@ -7,7 +7,6 @@ import ProyectoState from './context/Proyectos/ProyectoState';
 import TareaState from './context/Tareas/tareaState';
 import AlertaState from './context/Alertas/alertaState';
 import AuthState from './context/Autenticacion/authState';
-import AuthContext from './context/Autenticacion/authContext';
 
 function App() {
 
