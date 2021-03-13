@@ -7,7 +7,7 @@ import {
     CERRAR_SESION
 } from "../../types";
 
-export default (state, action) => {
+const authReducer = (state, action) => {
     switch (action.type) {
         case LOGIN_EXITOSO:
         case REGISTRO_EXITOSO:
@@ -16,14 +16,14 @@ export default (state, action) => {
                 ...state,
                 autenticado: true,
                 mensaje: null,
-                cargando:false
+                cargando: false
             }
         case OBTENER_USUARIO:
             return {
                 ...state,
-                autenticado:true,
+                autenticado: true,
                 usuario: action.payload,
-                cargando:false
+                cargando: false
             }
         case CERRAR_SESION:
         case LOGIN_ERROR:
@@ -33,11 +33,12 @@ export default (state, action) => {
                 ...state,
                 token: null,
                 usuario: null,
-                autenticado:null,
+                autenticado: null,
                 mensaje: action.payload,
-                cargando:false
+                cargando: false
             }
         default:
             return state;
     }
-}
+};
+export default authReducer;

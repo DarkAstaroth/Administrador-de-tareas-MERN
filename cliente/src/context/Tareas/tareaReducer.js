@@ -3,13 +3,12 @@ import {
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
-    ESTADO_TAREA,
     TAREA_ACTUAL,
     ACTUALIZAR_TAREA,
     LIMPIAR_TAREA
 } from '../../types/index';
 
-export default (state, action) => {
+const tareaReducer =  (state, action) => {
     switch (action.type) {
         case TAREAS_PROYECTO:
             return {
@@ -53,3 +52,5 @@ export default (state, action) => {
             return state
     }
 }
+
+export default tareaReducer;
