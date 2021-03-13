@@ -6,9 +6,7 @@ import tareaContext from '../../context/Tareas/tareaContext';
 const Proyecto = ({ proyecto }) => {
 
     const proyectosContext = useContext(proyectoContext);
-    const {
-        proyectoActual,
-    } = proyectosContext;
+    const { proyectoActual } = proyectosContext;
 
     // obtener la funcion del context de tarea
 
@@ -27,7 +25,7 @@ const Proyecto = ({ proyecto }) => {
             <button
                 type="button"
                 className="btn btn-blank"
-                onClick={() => seleccionarProyecto(proyecto.id)}
+                onClick={() => seleccionarProyecto(proyecto._id)}
             >{proyecto.nombre}</button>
         </li>
     );
