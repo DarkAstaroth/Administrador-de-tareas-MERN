@@ -105,7 +105,7 @@ exports.actualizarTarea = async (req, res) => {
 exports.eliminarTarea = async (req, res) => {
     try {
         // Extraer el proyecto y comprobar si existe
-        const { proyecto } = req.body;
+        const { proyecto } = req.query;
 
         // Revisar si la tarea existe o no
         let tarea = await Tarea.findById(req.params.id);
