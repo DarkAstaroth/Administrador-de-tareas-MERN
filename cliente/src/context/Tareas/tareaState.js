@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import TareaContext from './tareaContext'
 import TareaReducer from './tareaReducer'
-import { v4 as uuidv4 } from 'uuid';
+import clienteAxios from '../../config/axios'
 import {
     TAREAS_PROYECTO,
     AGREGAR_TAREA,
@@ -15,18 +15,7 @@ import {
 
 const TareaState = props => {
     const initialState = {
-        tareas: [
-            { id : '1', nombre: 'Elegir Plataforma', estado: true, proyectoId: '1' },
-            { id : '2', nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
-            { id : '3', nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
-            { id : '4', nombre: 'Elegir Hosting', estado: true, proyectoId: '1' },
-            { id : '5', nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
-            { id : '6', nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
-            { id : '7', nombre: 'Elegir Colores', estado: false, proyectoId: '2' },
-            { id : '8', nombre: 'Elegir Plataformas de pago', estado: false, proyectoId: '3' },
-
-        ],
-        tareasproyecto: null,
+        tareasproyecto: [],
         errortarea:false,
         tareaseleccionada:null
     }
@@ -47,12 +36,16 @@ const TareaState = props => {
 
     // Agregar una tarea al proyecto seleccionado
 
-    const agregarTarea = tarea => {
-        tarea.id = uuidv4();
-        dispatch({
-            type: AGREGAR_TAREA,
-            payload: tarea
-        })
+    const agregarTarea = async tarea => {
+        try {
+            const resultado = await clienteAxios.post('/api/tareas', tarea);
+            dispatch({
+                type: AGREGAR_TAREA,
+                payload: tarea
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // Valida y muestra un error en caso de que sea necesario
@@ -104,7 +97,6 @@ const TareaState = props => {
     return (
         <TareaContext.Provider
             value={{
-                tareas: state.tareas,
                 tareasproyecto: state.tareasproyecto,
                 errortarea : state.errortarea,
                 tareaseleccionada: state.tareaseleccionada,
